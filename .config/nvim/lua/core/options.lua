@@ -12,6 +12,8 @@ vim.o.softtabstop = 2 -- Number of spaces a tab counts for when editing
 vim.o.shiftwidth = 2 -- number of spaces inserted for each indentation
 vim.o.expandtab = true -- Convert tabs to spaces
 
+-- vim.opt.guicursor = 'n-v-c-sm:block,i-ci-ve:ver35,r-cr-o:hor20'
+vim.opt.cursorline = true -- Show line where the cursor is
 vim.o.splitbelow = true -- Force all horizontal splits to go below current window (default: false)
 vim.o.splitright = true -- Force all vertical splits to go to the right of current window (default: false)
 vim.o.hlsearch = false -- Set highlight on search (default: true)

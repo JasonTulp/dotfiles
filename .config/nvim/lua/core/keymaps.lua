@@ -30,6 +30,23 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
 vim.keymap.set('n', 'n', 'nzzzv', opts)
 vim.keymap.set('n', 'N', 'Nzzzv', opts)
 
+-- Navigate and center
+vim.keymap.set('n', 'j', function()
+	if vim.v.count > 0 then
+		return 'jzz'
+	else
+		return 'j'
+	end
+end, { expr = true })
+
+vim.keymap.set('n', 'k', function()
+	if vim.v.count > 0 then
+		return 'kzz'
+	else
+		return 'k'
+	end
+end, { expr = true })
+
 -- Resize with arrows
 vim.keymap.set('n', '<D-Up>', ':resize -2<CR>', opts)
 vim.keymap.set('n', '<D-Down>', ':resize +2<CR>', opts)

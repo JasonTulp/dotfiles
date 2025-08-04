@@ -1,6 +1,9 @@
-font-family = "JetBrainsMonoNL Nerd Font Mono"
-theme = "GitLab-Dark-Grey"
+font-family = "MesloLGS Nerd Font Mono"
 unfocused-split-opacity=1 
+theme = "GitLab-Dark-Grey"
 background-opacity=0.95
 background-blur=true
+cursor-style-blink=true
+adjust-cursor-thickness=3
+
 
