@@ -1,3 +1,8 @@
+# Fix terminal rendering for SSH sessions from Ghostty
+if [[ "$SSH_CONNECTION" && "$TERM" == "xterm-ghostty" ]]; then
+  export TERM="xterm-256color"
+fi
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export GOPATH=$HOME/go
