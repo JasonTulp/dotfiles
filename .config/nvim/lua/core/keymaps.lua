@@ -65,6 +65,13 @@ vim.keymap.set('n', '<leader>h', '<C-w>s', opts) -- split window horizontally
 vim.keymap.set('n', '<leader>se', '<C-w>=', opts) -- make split windows equal width & height
 vim.keymap.set('n', '<leader>xs', ':close<CR>', opts) -- close current split window
 
+-- Git Stuff to reset hunky hunks
+vim.keymap.set('n', '<leader>grh', '<cmd>Gitsigns reset_hunk<CR>')
+vim.keymap.set('n', '<leader>grb', '<cmd>Gitsigns reset_buffer<CR>')
+vim.keymap.set('n', '<leader>gb', '<cmd>Gitsigns blame_line<CR>')
+vim.keymap.set('n', '<leader>gsb', '<cmd>Gitsigns stage_buffer<CR>')
+vim.keymap.set('n', '<leader>gsh', '<cmd>Gitsigns stage_hunk<CR>')
+
 -- Navigate between splits
 vim.keymap.set('n', '<C-k>', ':wincmd k<CR>', opts)
 vim.keymap.set('n', '<C-j>', ':wincmd j<CR>', opts)

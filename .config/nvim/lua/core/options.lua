@@ -11,6 +11,7 @@ vim.o.tabstop = 2 -- Number of spaces that a tab counts
 vim.o.softtabstop = 2 -- Number of spaces a tab counts for when editing
 vim.o.shiftwidth = 2 -- number of spaces inserted for each indentation
 vim.o.expandtab = true -- Convert tabs to spaces
+vim.opt.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s"
 
 -- vim.opt.guicursor = 'n-v-c-sm:block,i-ci-ve:ver35,r-cr-o:hor20'
 vim.opt.cursorline = true -- Show line where the cursor is
