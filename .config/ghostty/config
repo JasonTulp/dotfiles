@@ -1,0 +1,5 @@
+font-family = "JetBrainsMonoNL Nerd Font Mono"
+theme = "GitLab-Dark-Grey"
+unfocused-split-opacity=1 
+background-opacity=0.9
+background-blur=true
