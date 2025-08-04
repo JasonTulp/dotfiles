@@ -2,12 +2,11 @@ add_newline = true
 format = """
 [░▒▓](#F57600)\
 [ 󰈸 ](bg:#F57600 fg:#000000)\
-[](fg:#F57600 bg:#724216)\
 $directory\
-[](fg:#724216 bg:#57371A)\
+[](fg:#F57600 bg:#724216)\
 $git_branch\
 $git_status\
-[](fg:#57371A bg:#3D2D1E)\
+[](fg:#724216 bg:#3D2D1E)\
 $nodejs\
 $rust\
 $golang\
@@ -33,19 +32,19 @@ error_symbol = "[░▒▓ ](#FD0000)"
 vimcmd_symbol = "[](green)"
 
 [directory]
-style = "fg:#FFFFFF bg:#724216 bold"
+style = "fg:#000000 bg:#F57600 bold"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#57371A"
-format = '[[ $symbol $branch ](fg:#EEEEEE bg:#57371A)]($style)'
+style = "bg:#724216"
+format = '[[ $symbol $branch ](fg:#EEEEEE bg:#724216)]($style)'
 
 [git_status]
-style = "bg:#57371A"
-format = '[[($all_status$ahead_behind )](fg:#EEEEEE bg:#57371A)]($style)'
+style = "bg:#724216"
+format = '[[($all_status$ahead_behind )](fg:#EEEEEE bg:#724216)]($style)'
 
 [nodejs]
 symbol = ""
