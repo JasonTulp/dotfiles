@@ -3,7 +3,10 @@ if [[ "$SSH_CONNECTION" && "$TERM" == "xterm-ghostty" ]]; then
   export TERM="xterm-256color"
 fi
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Set homebrew variables
+ if [[ "$(uname)" != "Linux" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+ fi
 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
@@ -56,6 +59,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias ls='ls --color'
 alias c='clear'
 alias v='nvim'
+alias crun='cargo run -- --dev --tmp --execution=native --pruning=archive -l=evm=debug,--eth-http=https://mainnet.infura.io/v3/8e347ee0e4b647bca3ce06d36fa93dd1'
 
 # Shell Integrations
 # Use FZF
