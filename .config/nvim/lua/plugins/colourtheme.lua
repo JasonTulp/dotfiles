@@ -36,19 +36,19 @@ local function setup_colorscheme()
 
 	-- Syntax Colors
 	set(ns, 'Comment', { fg = '#60605f', italic = true })
-	set(ns, 'String', { fg = '#c3e88d', bold = true })
-	set(ns, 'Keyword', { fg = '#be8bdb', bold = true })
-	set(ns, 'Identifier', { fg = '#FFFFFF', bold = true }) -- variables
-	set(ns, '@variable.parameter', { fg = '#f68a68', bold = true }) -- variables
-	set(ns, '@variable', { fg = '#FFFFFF', bold = true }) -- variables
+	set(ns, 'String', { fg = '#c3e88d' })
+	set(ns, 'Keyword', { fg = '#be8bdb' })
+	set(ns, 'Identifier', { fg = '#FFFFFF' }) -- variables
+	set(ns, '@variable.parameter', { fg = '#f68a68' }) -- variables
+	set(ns, '@variable', { fg = '#FFFFFF' }) -- variables
 	-- set(ns, '@variable.member', { fg = '#f68a68' }) -- variables
-	set(ns, 'Function', { fg = '#82aaff', bold = true })
-	set(ns, 'Number', { fg = '#f68a68', bold = true })
-	set(ns, 'Type', { fg = '#ffca69', bold = true })
+	set(ns, 'Function', { fg = '#82aaff' })
+	set(ns, 'Number', { fg = '#f68a68' })
+	set(ns, 'Type', { fg = '#ffca69' })
 
 	-- Types
-	set(ns, '@type.builtin', { fg = '#be8bdb', bold = true })
-	set(ns, '@type.parameter', { fg = '#f68a68', bold = true })
+	set(ns, '@type.builtin', { fg = '#be8bdb' })
+	set(ns, '@type.parameter', { fg = '#f68a68' })
 	--		set(ns, '@type.identifier', { fg = '#f68a68' })
 	-- set(ns, '@constructor', { fg = '#ff0000' })
 	-- set(ns, '@function.identifier', { fg = '#ff0000' })

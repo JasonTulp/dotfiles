@@ -1,7 +1,7 @@
 add_newline = true
 format = """
 [░▒▓](#F57600)\
-[--  --](bg:#F57600 fg:#000000)\
+[ 󰈸 ](bg:#F57600 fg:#000000)\
 $directory\
 [](fg:#F57600 bg:#724216)\
 $git_branch\

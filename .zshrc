@@ -4,9 +4,12 @@ if [[ "$SSH_CONNECTION" && "$TERM" == "xterm-ghostty" ]]; then
 fi
 
 # Set homebrew variables
- if [[ "$(uname)" != "Linux" ]]; then
+if [[ "$(uname)" != "Linux" ]]; then
+  export STARSHIP_CONFIG="$HOME/.config/starship-mac.toml"    
   eval "$(/opt/homebrew/bin/brew shellenv)"
- fi
+else
+  export STARSHIP_CONFIG="$HOME/.config/starship-linux.toml"    
+fi
 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
@@ -63,7 +66,7 @@ alias crun='cargo run -- --dev --tmp --execution=native --pruning=archive -l=evm
 
 # Shell Integrations
 # Use FZF
-eval "$(fzf --zsh)"
+# eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
-
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

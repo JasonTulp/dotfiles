@@ -1,4 +1,9 @@
 font-family = "MonoLisa"
+font-style = "Medium"
+font-style-bold = "Black"
+font-style-italic = "Medium Italic"
+font-style-bold-italic = "Black Italic"
+
 font-feature = -calt
 font-feature = -liga
 unfocused-split-opacity=1
