@@ -41,4 +41,11 @@ return {
 			require('colorizer').setup()
 		end,
 	},
+	{
+		-- Used to nicely scroll down to cursor
+		'karb94/neoscroll.nvim',
+		opts = {
+			duration_multiplier = 0.2,
+		},
+	},
 }
