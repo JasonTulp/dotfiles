@@ -21,8 +21,8 @@ if [[ "$SENDER" == "aerospace_workspace_change" ]]; then
         aerospace move-workspace-to-monitor --workspace "$PREV_WORKSPACE" 1
         sketchybar --set space.$PREV_WORKSPACE drawing=off display=1
     fi
-    sketchybar --set space.$PREV_WORKSPACE background.color=$TRANSPARENT label.color=$TEXT_GREY icon.color=$TEXT_GREY background.border_color=$TEXT_WHITE
-    sketchybar --set space.$FOCUSED_WORKSPACE background.color=$HIGHLIGHT_BACKGROUND label.color=$TEXT_WHITE icon.color=$TEXT_WHITE background.border_color=$TEXT_GREY
+    sketchybar --set space.$PREV_WORKSPACE background.color=$BACKGROUND_LIGHT label.color=$TEXT_WHITE icon.color=$TEXT_GREY background.border_color=$BORDER_DARK
+    sketchybar --set space.$FOCUSED_WORKSPACE background.color=$BACKGROUND_SELECTED label.color=$TEXT_WHITE icon.color=$TEXT_WHITE background.border_color=$TEXT_WHITE
 else
     FOCUSED_WORKSPACE="$(aerospace list-workspaces --focused)"
 fi

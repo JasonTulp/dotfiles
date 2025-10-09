@@ -19,12 +19,12 @@ sketchybar --bar position=top height=32 color="$TRANSPARENT" padding_left=6 padd
 # https://felixkratz.github.io/SketchyBar/config/items
 
 default=(
-    padding_left=5
-    padding_right=5
-    icon.font="Hack Nerd Font:Bold:17.0"
-    label.font="SF Pro:Semibold:17.0"
+    padding_left=0
+    padding_right=0
+    icon.font="Hack Nerd Font:Bold:16.0"
+    label.font="Hack Nerd Font:Regular:16.0"
     icon.color="$TEXT_GREY"
-    label.color="$TEXT_GREY"
+    label.color="$TEXT_WHITE"
     icon.padding_left=4
     icon.padding_right=4
     label.padding_left=4
@@ -34,7 +34,21 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-sketchybar --add item spacePaddingLeft left --set spacePaddingLeft padding_left=0
+###### Apple Logo #####
+#sketchybar --add item apple_logo left \
+#    --set apple_logo \
+#    icon="" \
+#    icon.font="Hack Nerd Font:Bold:20.0" \
+#    icon.color="$TEXT_WHITE" \
+#    icon.padding_left=10 \
+#    icon.padding_right=0 \
+#    background.color="$TRANSPARENT" \
+#    background.corner_radius=16 \
+#    background.height=26 \
+#    background.padding_left=0 \
+#    background.padding_right=0 \
+#    padding_left=0 \
+#    padding_right=0
 
 ##### Adding aerospace layouts #####
 # Add the aerospace events we specified in aerospace.toml
@@ -52,16 +66,19 @@ for sid in $(aerospace list-workspaces --all); do
         background.corner_radius=15 \
         background.drawing=on \
         background.border_width=1 \
-        background.border_color="$TEXT_WHITE" \
+        background.border_color="$BORDER_DARK" \
         background.height=23 \
         background.padding_right=5 \
-        background.padding_left=5 \
+        background.padding_left=0 \
+        background.color="$BACKGROUND_LIGHT" \
         icon="$sid" \
         icon.shadow.drawing=off \
         icon.padding_left=10 \
+        icon.padding_right=-2 \
+        padding_left=2 \
         label.font="sketchybar-app-font:Regular:16.0" \
         label.padding_right=20 \
-        label.padding_left=0 \
+        label.padding_left=3 \
         label.y_offset=-1 \
         label.shadow.drawing=off \
         click_script="aerospace workspace $sid"
@@ -87,9 +104,7 @@ for mid in $(aerospace list-monitors | cut -c1); do
 done
 
 # Set color for currently focused space
-sketchybar --set space."$(aerospace list-workspaces --focused)" background.color=$HIGHLIGHT_BACKGROUND label.color=$TEXT_WHITE icon.color=$TEXT_WHITE background.border_color=$TEXT_GREY
-
-sketchybar --add item spacePaddingRight left --set spacePaddingRight padding_left=-18
+sketchybar --set space."$(aerospace list-workspaces --focused)" background.color=$BACKGROUND_SELECTED label.color=$TEXT_WHITE icon.color=$TEXT_WHITE background.border_color=$TEXT_WHITE
 
 # Subscribe to aerospace events to update workspace icons
 sketchybar --add item space_separator left \
@@ -123,9 +138,11 @@ sketchybar --add item clock right \
     label.font="alarm clock:Regular:18.0" \
     label.padding_right=10 \
     padding_right=0 \
-    \
+    padding_left=5 \
     --add item volume right \
     --set volume script="$PLUGIN_DIR/volume.sh" \
+    padding_left=5 \
+    padding_right=5 \
     --subscribe volume volume_change \
     \
     --add item battery right \
@@ -134,7 +151,10 @@ sketchybar --add item clock right \
     \
     --add item wifi right \
     --set wifi script="$PLUGIN_DIR/wifi.sh" label.font="SF Pro:Italic:12.0" label.y_offset=-3 \
-    popup.background.color="$BACKGROUND" \
+    label.padding_right=0 \
+    label.padding_left=0 \
+    padding_left=5 \
+    popup.background.color="$BACKGROUND_DARK" \
     popup.background.border_width=2 \
     popup.background.border_color="$TEXT_GREY" \
     popup.background.corner_radius=10 \
@@ -149,15 +169,31 @@ sketchybar --add item clock right \
     --add item wifi.pub.addr popup.wifi \
     --set wifi.pub.addr icon="󰖟" \
     --add item swap e \
-    --set swap update_freq=2 script="$PLUGIN_DIR/memswap.sh" \
+    --set swap update_freq=1 script="$PLUGIN_DIR/memswap.sh" \
     icon="" \
     background.corner_radius=16 \
     background.color="$BACKGROUND_DARKER" \
     background.height=26 \
-    label.font="Hack Nerd Font:Italic:13.0" \
+    label.font="Hack Nerd Font:Italic:14.0" \
     icon.padding_left=8 \
     label.padding_right=8 \
     click_script="open -a 'Activity Monitor'" \
+    background.border_width=1 \
+    background.border_color=$BORDER_DARK \
+    \
+    --add item cpu e \
+    --set cpu update_freq=1 script="$PLUGIN_DIR/cpu.sh" \
+    icon="" \
+    background.corner_radius=16 \
+    background.color="$BACKGROUND_DARKER" \
+    background.height=26 \
+    label.font="Hack Nerd Font:Italic:14.0" \
+    icon.padding_left=8 \
+    label.padding_right=8 \
+    padding_left=5 \
+    click_script="open -a 'Activity Monitor'" \
+    background.border_width=1 \
+    background.border_color=$BORDER_DARK
     \
     --add item ncspot e \
     --set ncspot updates=when_shown update_freq=2 script="$PLUGIN_DIR/ncspot.sh" \
@@ -165,7 +201,7 @@ sketchybar --add item clock right \
     background.corner_radius=16 \
     background.color="$BACKGROUND_DARKER" \
     background.height=26 \
-    label.font="Comic Sans Ms:Regular:13.0" \
+    label.font="Hack Nerd Font:Bold:14.0" \
     label.color="$TEXT_WHITE" \
     label.max_chars=15 \
     scroll_texts=true \
@@ -182,28 +218,32 @@ sketchybar --add item clock right \
     background.corner_radius=16 \
     background.color="$BACKGROUND" \
     background.height=26 \
-    label.font="Comic Sans Ms:Regular:13.0" \
+    label.font="Hack Nerd Font:Regular:14.0" \
     label.color="$TEXT_GREY" \
     scroll_texts=true \
     drawing=off
 
 #### Groups !!! ####
-sketchybar --add bracket spaces '/space\..*/' spacePaddingLeft spacePaddingRight \
-    --set spaces background.color="$BACKGROUND_DARKER" \
+sketchybar --add bracket spaces '/space\..*/' \
+    --set spaces background.color="TRANSPARENT" \
     background.corner_radius=16 \
     background.height=26 \
-    padding_left=0
+    padding_left=0 \
 
 sketchybar --add bracket rightItems volume battery wifi \
-    --set rightItems background.color="$BACKGROUND_DARK" \
-    background.corner_radius=16 \
-    background.height=26
-
-sketchybar --add bracket clock \
-    --set clock background.color="$BACKGROUND_DARKER" \
+    --set rightItems background.color="$BACKGROUND_SELECTED" \
     background.corner_radius=16 \
     background.height=26 \
-    padding_right=0
+    background.border_width=1 \
+    background.border_color=$BORDER_DARK
+
+sketchybar --add bracket clock \
+    --set clock background.color="$BACKGROUND_DARK" \
+    background.corner_radius=16 \
+    background.height=26 \
+    padding_right=0 \
+    background.border_width=1 \
+    background.border_color=$BORDER_DARK
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update

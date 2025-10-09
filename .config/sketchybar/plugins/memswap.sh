@@ -6,20 +6,22 @@ ALERTCOLOR=$TEXT_RED
 TOTALSWAP="$(sysctl vm.swapusage | awk '{print $4}')"
 
 pages_active=$(vm_stat | awk '/Pages active/ {print $3}' | sed 's/\.//')
-pages_inactive=$(vm_stat | awk '/Pages inactive/ {print $3}' | sed 's/\.//')
-pages_speculative=$(vm_stat | awk '/Pages speculative/ {print $3}' | sed 's/\.//')
 pages_wired=$(vm_stat | awk '/Pages wired down/ {print $4}' | sed 's/\.//')
+pages_compressed=$(vm_stat | awk '/Pages occupied by compressor/ {print $5}' | sed 's/\.//')
 page_size=$(vm_stat | awk '/page size of/ {print $8}')
 
-used_pages=$((pages_active + pages_inactive + pages_speculative + pages_wired))
+# App memory = active + wired + compressed (this matches Activity Monitor)
+used_pages=$((pages_active + pages_wired + pages_compressed))
 
-used_mem=$((used_pages * page_size / 1024 / 1024))
+# Convert to GB with 2 decimal places
+used_mem_bytes=$((used_pages * page_size))
+used_mem_gb=$(echo "scale=2; $used_mem_bytes / 1024 / 1024 / 1024" | bc)
 
-clr=""
-if [ "$used_mem" != "0.00M" ]; then
+clr="$DEFCOLOR"
+# Color alert if using more than 8GB
+threshold=50
+if (( $(echo "$used_mem_gb > $threshold" | bc -l) )); then
     clr="$ALERTCOLOR"
-else
-    clr="$DEFCOLOR"
 fi
 
-sketchybar --set "$NAME" label="$used_mem" icon.color="$clr" label.color="$clr"
+sketchybar --set "$NAME" label="${used_mem_gb}GB" icon.color="$clr" label.color="$clr"
