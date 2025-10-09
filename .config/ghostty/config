@@ -14,3 +14,4 @@ cursor-style-blink=true
 adjust-cursor-thickness=3
 
 
+keybind = shift+enter=text:\x1b\r
