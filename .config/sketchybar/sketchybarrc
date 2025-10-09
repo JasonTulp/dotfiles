@@ -11,7 +11,7 @@ source "$PLUGIN_DIR/colors.sh"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar position=top height=32 color="$TRANSPARENT"
+sketchybar --bar position=top height=32 color="$TRANSPARENT" padding_left=6 padding_right=6
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -30,11 +30,11 @@ default=(
     label.padding_left=4
     label.padding_right=4
     updates=on
-    y_offset=-3
+    y_offset=-2
 )
 sketchybar --default "${default[@]}"
 
-sketchybar --add item spacePaddingLeft left --set spacePaddingLeft padding_left=-26
+sketchybar --add item spacePaddingLeft left --set spacePaddingLeft padding_left=0
 
 ##### Adding aerospace layouts #####
 # Add the aerospace events we specified in aerospace.toml
@@ -114,10 +114,15 @@ sketchybar --add item space_separator left \
 
 sketchybar --add item clock right \
     --set clock update_freq=10 script="$PLUGIN_DIR/clock.sh" \
-    icon.padding_left=5 \
+    icon=" " \
+    icon.color="$TEXT_WHITE" \
+    icon.padding_left=8 \
+    icon.y_offset=0 \
     label.color="$TEXT_WHITE" \
+    label.y_offset=-1 \
     label.font="alarm clock:Regular:18.0" \
     label.padding_right=10 \
+    padding_right=0 \
     \
     --add item volume right \
     --set volume script="$PLUGIN_DIR/volume.sh" \
@@ -147,7 +152,7 @@ sketchybar --add item clock right \
     --set swap update_freq=2 script="$PLUGIN_DIR/memswap.sh" \
     icon="" \
     background.corner_radius=16 \
-    background.color="$BACKGROUND_DARK" \
+    background.color="$BACKGROUND_DARKER" \
     background.height=26 \
     label.font="Hack Nerd Font:Italic:13.0" \
     icon.padding_left=8 \
@@ -158,7 +163,7 @@ sketchybar --add item clock right \
     --set ncspot updates=when_shown update_freq=2 script="$PLUGIN_DIR/ncspot.sh" \
     icon="" \
     background.corner_radius=16 \
-    background.color="$BACKGROUND_DARK" \
+    background.color="$BACKGROUND_DARKER" \
     background.height=26 \
     label.font="Comic Sans Ms:Regular:13.0" \
     label.color="$TEXT_WHITE" \
@@ -184,19 +189,21 @@ sketchybar --add item clock right \
 
 #### Groups !!! ####
 sketchybar --add bracket spaces '/space\..*/' spacePaddingLeft spacePaddingRight \
-    --set spaces background.color="$BACKGROUND_DARK" \
+    --set spaces background.color="$BACKGROUND_DARKER" \
     background.corner_radius=16 \
-    background.height=26
+    background.height=26 \
+    padding_left=0
 
 sketchybar --add bracket rightItems volume battery wifi \
-    --set rightItems background.color="$BACKGROUND" \
+    --set rightItems background.color="$BACKGROUND_DARK" \
     background.corner_radius=16 \
     background.height=26
 
-sketchybar --add bracket calander clock \
-    --set clock background.color="$BACKGROUND_DARK" \
+sketchybar --add bracket clock \
+    --set clock background.color="$BACKGROUND_DARKER" \
     background.corner_radius=16 \
-    background.height=26
+    background.height=26 \
+    padding_right=0
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update

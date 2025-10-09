@@ -19,4 +19,4 @@ fi
 
 sketchybar --set day drawing=on \
     label="$DAY_PLANNER_TASK_TITLE: at ${DAY_PLANNER_TASK_TIMESTAMP:0:5}" \
-    icon.color="$TEXT_ORGANGE"
+    icon.color="$TEXT_ORANGE"

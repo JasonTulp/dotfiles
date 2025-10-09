@@ -19,7 +19,7 @@ case "${PERCENTAGE}" in
     ;;
 [3-5][0-9])
     ICON=""
-    COLOUR=$TEXT_ORGANGE
+    COLOUR=$TEXT_ORANGE
     ;;
 [1-2][0-9])
     ICON=""
