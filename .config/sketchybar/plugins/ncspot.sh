@@ -1,26 +1,31 @@
 #!/bin/bash
 source "$CONFIG_DIR/plugins/colors.sh"
 
-JSON="$(nc -U /tmp/ncspot-501/ncspot.sock </dev/null 2>/dev/null)"
-
-# Check if the JSON is empty
-if [ -z "$JSON" ]; then
+# Check if Spotify is running
+if ! pgrep -x "Spotify" > /dev/null; then
     sketchybar --set ncspot drawing=off
     exit 0
 fi
 
-STATUS="$(echo "$JSON" | jq -r '.mode')"
-if [ "$STATUS" = "Stopped" ] || [ "$STATUS" = "FinishedTrack" ]; then
-    sketchybar --set ncspot drawing=on icon.color="$TEXT_GREY"
+# Get Spotify status using osascript
+STATE=$(osascript -e 'tell application "Spotify" to player state as string' 2>/dev/null)
+
+if [ "$STATE" = "" ]; then
+    sketchybar --set ncspot drawing=off
     exit 0
 fi
 
-STATUS="$(echo "$JSON" | jq -r '.mode.Playing')"
-
-if [ "$STATUS" = "null" ]; then
-    sketchybar --set ncspot drawing=on icon.color="$TEXT_GREY"
+if [ "$STATE" = "stopped" ]; then
+    sketchybar --set ncspot drawing=on icon.color="$TEXT_GREY" label=""
     exit 0
 fi
 
-TITLE="$(echo "$JSON" | jq -r '.playable.title')"
-sketchybar --set ncspot drawing=on label="$TITLE" icon.color="$TEXT_SPOTIFY_GREEN"
+# Get track info
+TRACK=$(osascript -e 'tell application "Spotify" to name of current track as string' 2>/dev/null)
+ARTIST=$(osascript -e 'tell application "Spotify" to artist of current track as string' 2>/dev/null)
+
+if [ "$STATE" = "playing" ]; then
+    sketchybar --set ncspot drawing=on label="$TRACK - $ARTIST" icon.color="$TEXT_SPOTIFY_GREEN"
+else
+    sketchybar --set ncspot drawing=on label="$TRACK - $ARTIST" icon.color="$TEXT_GREY"
+fi

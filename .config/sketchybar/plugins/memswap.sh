@@ -24,4 +24,4 @@ if (( $(echo "$used_mem_gb > $threshold" | bc -l) )); then
     clr="$ALERTCOLOR"
 fi
 
-sketchybar --set "$NAME" label="${used_mem_gb}GB" icon.color="$clr" label.color="$clr"
+sketchybar --set "$NAME" label="${used_mem_gb} GB" icon.color="$clr" label.color="$clr"

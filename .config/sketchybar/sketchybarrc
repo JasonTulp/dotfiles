@@ -135,7 +135,7 @@ sketchybar --add item clock right \
     icon.y_offset=0 \
     label.color="$TEXT_WHITE" \
     label.y_offset=-1 \
-    label.font="alarm clock:Regular:18.0" \
+    label.font="alarm clock:Regular:16.0" \
     label.padding_right=10 \
     padding_right=0 \
     padding_left=5 \
@@ -165,11 +165,17 @@ sketchybar --add item clock right \
     \
     --add item wifi.priv.addr popup.wifi \
     --set wifi.priv.addr icon="󰌗" \
+    label.padding_right=20 \
+    icon.padding_left=10 \
+    icon.padding_right=0 \
     \
     --add item wifi.pub.addr popup.wifi \
     --set wifi.pub.addr icon="󰖟" \
+    label.padding_right=20 \
+    icon.padding_left=10 \
+    icon.padding_right=0 \
     --add item swap e \
-    --set swap update_freq=1 script="$PLUGIN_DIR/memswap.sh" \
+    --set swap update_freq=2 script="$PLUGIN_DIR/memswap.sh" \
     icon="" \
     background.corner_radius=16 \
     background.color="$BACKGROUND_DARKER" \
@@ -182,7 +188,7 @@ sketchybar --add item clock right \
     background.border_color=$BORDER_DARK \
     \
     --add item cpu e \
-    --set cpu update_freq=1 script="$PLUGIN_DIR/cpu.sh" \
+    --set cpu update_freq=2 script="$PLUGIN_DIR/cpu.sh" \
     icon="" \
     background.corner_radius=16 \
     background.color="$BACKGROUND_DARKER" \
@@ -195,18 +201,18 @@ sketchybar --add item clock right \
     background.border_width=1 \
     background.border_color=$BORDER_DARK
     \
-    --add item ncspot e \
-    --set ncspot updates=when_shown update_freq=2 script="$PLUGIN_DIR/ncspot.sh" \
-    icon="" \
-    background.corner_radius=16 \
-    background.color="$BACKGROUND_DARKER" \
-    background.height=26 \
-    label.font="Hack Nerd Font:Bold:14.0" \
-    label.color="$TEXT_WHITE" \
-    label.max_chars=15 \
-    scroll_texts=true \
-    click_script="tmux send-keys -t spot 'P'" \
-    \
+#    --add item ncspot e \
+#    --set ncspot updates=when_shown update_freq=2 script="$PLUGIN_DIR/ncspot.sh" \
+#    icon="" \
+#    background.corner_radius=16 \
+#    background.color="$BACKGROUND_DARKER" \
+#    background.height=26 \
+#    label.font="Hack Nerd Font:Bold:14.0" \
+#    label.color="$TEXT_WHITE" \
+#    label.max_chars=15 \
+#    scroll_texts=true \
+#    click_script="tmux send-keys -t spot 'P'" \
+#    \
     --add item day e \
     --set day label.max_chars=20 \
     icon.padding_left=2 \

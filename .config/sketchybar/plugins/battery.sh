@@ -13,13 +13,13 @@ case "${PERCENTAGE}" in
     ICON=""
     COLOUR=$TEXT_GREY
     ;;
-[6-8][0-9])
+[5-8][0-9])
     ICON=""
     COLOUR=$TEXT_GREY
     ;;
-[3-5][0-9])
+[3-4][0-9])
     ICON=""
-    COLOUR=$TEXT_ORANGE
+    COLOUR=$TEXT_GREY
     ;;
 [1-2][0-9])
     ICON=""
