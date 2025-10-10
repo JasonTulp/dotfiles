@@ -174,6 +174,34 @@ sketchybar --add item clock right \
     label.padding_right=20 \
     icon.padding_left=10 \
     icon.padding_right=0 \
+    --add item activity_monitor e \
+    --set activity_monitor \
+    icon="" \
+    label.drawing=off \
+    background.corner_radius=16 \
+    background.color="$BACKGROUND_SELECTED" \
+    background.height=26 \
+    icon.padding_left=8 \
+    icon.padding_right=8 \
+    background.border_width=1 \
+    background.border_color=$BORDER_DARK \
+    click_script="open -a 'Activity Monitor'" \
+    \
+    --add item storage e \
+    --set storage update_freq=30 script="$PLUGIN_DIR/storage.sh" \
+    icon="" \
+    background.corner_radius=16 \
+    background.color="$BACKGROUND_DARKER" \
+    background.height=26 \
+    label.font="Hack Nerd Font:Italic:14.0" \
+    icon.padding_left=7 \
+    icon.padding_right=6 \
+    label.padding_right=8 \
+    padding_left=5 \
+    background.border_width=1 \
+    background.border_color=$BORDER_DARK \
+    --subscribe storage mouse.clicked \
+    \
     --add item swap e \
     --set swap update_freq=2 script="$PLUGIN_DIR/memswap.sh" \
     icon="" \
@@ -181,11 +209,13 @@ sketchybar --add item clock right \
     background.color="$BACKGROUND_DARKER" \
     background.height=26 \
     label.font="Hack Nerd Font:Italic:14.0" \
-    icon.padding_left=8 \
+    icon.padding_left=7 \
+    icon.padding_right=6 \
     label.padding_right=8 \
-    click_script="open -a 'Activity Monitor'" \
+    padding_left=5 \
     background.border_width=1 \
     background.border_color=$BORDER_DARK \
+    --subscribe swap mouse.clicked \
     \
     --add item cpu e \
     --set cpu update_freq=2 script="$PLUGIN_DIR/cpu.sh" \
@@ -194,12 +224,13 @@ sketchybar --add item clock right \
     background.color="$BACKGROUND_DARKER" \
     background.height=26 \
     label.font="Hack Nerd Font:Italic:14.0" \
-    icon.padding_left=8 \
+    icon.padding_left=7 \
+    icon.padding_right=6 \
     label.padding_right=8 \
     padding_left=5 \
-    click_script="open -a 'Activity Monitor'" \
     background.border_width=1 \
-    background.border_color=$BORDER_DARK
+    background.border_color=$BORDER_DARK \
+    --subscribe cpu mouse.clicked \
     \
 #    --add item ncspot e \
 #    --set ncspot updates=when_shown update_freq=2 script="$PLUGIN_DIR/ncspot.sh" \

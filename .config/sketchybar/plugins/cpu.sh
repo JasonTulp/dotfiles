@@ -1,6 +1,12 @@
 #!/bin/bash
 source "$CONFIG_DIR/plugins/colors.sh"
 
+# Handle toggle click
+if [ "$SENDER" = "mouse.clicked" ]; then
+    sketchybar --set "$NAME" label.drawing=toggle
+    exit 0
+fi
+
 DEFCOLOR=$TEXT_WHITE
 ALERTCOLOR=$TEXT_RED
 
