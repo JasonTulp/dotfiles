@@ -712,6 +712,9 @@ function icon_map() {
     "Tweetbot" | "Twitter")
         icon_result=":twitter:"
         ;;
+    "Unity" | "Unity Hub")
+        icon_result="U"
+        ;;
     "UTM")
         icon_result=":utm:"
         ;;

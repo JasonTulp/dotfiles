@@ -40,6 +40,11 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Mouse centers to window when focus changes. I don't actually like this very much
 # on-focus-changed = "move-mouse window-lazy-center"
 
+# Trigger sketchybar update when focus changes (e.g., when a window closes)
+on-focus-changed = [
+    'exec-and-forget /Users/jasontulp/dotfiles/.config/sketchybar/plugins/aerospace_focus_change.sh'
+]
+
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
@@ -216,3 +221,38 @@ automatically-unhide-macos-hidden-apps = false
     down = 'volume down'
     up = 'volume up'
     shift-down = ['volume set 0', 'mode main']
+
+# Window rules - automatically float certain windows
+# See: https://nikitabobko.github.io/AeroSpace/guide#on-window-detected
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+#[[on-window-detected]]
+#if.app-id = 'com.apple.ActivityMonitor'
+#run = 'layout floating'
+
+# Archive Utility (when extracting files)
+[[on-window-detected]]
+if.app-id = 'com.apple.archiveutility'
+run = 'layout floating'
+
+# Calculator
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+# System Settings (macOS Ventura+)
+[[on-window-detected]]
+if.app-id = 'com.apple.SystemSettings'
+run = 'layout floating'
+
+# Preferences/Settings windows
+[[on-window-detected]]
+if.window-title-regex-substring = 'Preferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.window-title-regex-substring = 'Settings'
+run = 'layout floating'
