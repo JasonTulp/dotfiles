@@ -62,7 +62,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 alias ls='ls --color'
 alias c='clear'
 alias v='nvim'
-alias crun='cargo run -- --dev --tmp --execution=native --pruning=archive -l=evm=debug,--eth-http=https://mainnet.infura.io/v3/8e347ee0e4b647bca3ce06d36fa93dd1'
+alias crun='cargo run -- --dev --tmp --execution=native --pruning=archive -l=evm=debug'
 
 # Shell Integrations
 # Use FZF
