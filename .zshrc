@@ -70,3 +70,8 @@ alias crun='cargo run -- --dev --tmp --execution=native --pruning=archive -l=evm
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Load NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
