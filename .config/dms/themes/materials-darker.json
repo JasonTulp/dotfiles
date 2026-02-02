@@ -1,0 +1,42 @@
+{
+  "dark": {
+    "name": "Material Darker",
+    "primary": "#e08b0b",
+    "primaryText": "#111111",
+    "primaryContainer": "#be8bdb",
+    "secondary": "#ffca69",
+    "surface": "#191919",
+    "surfaceText": "#eeeeee",
+    "surfaceVariant": "#222222",
+    "surfaceVariantText": "#d4d4d4",
+    "surfaceTint": "#82aaff",
+    "background": "#212121",
+    "backgroundText": "#c3e88d",
+    "outline": "#60605f",
+    "surfaceContainer": "#191919",
+    "surfaceContainerHigh": "#353535",
+    "error": "#ff8a68",
+    "warning": "#e08a0b",
+    "info": "#82aaff"
+  },
+  "light": {
+    "name": "Material Darker light",
+    "primary": "#5577cc",
+    "primaryText": "#ffffff",
+    "primaryContainer": "#82aaff",
+    "secondary": "#cc9a30",
+    "surface": "#e0e0e0",
+    "surfaceText": "#5577cc",
+    "surfaceVariant": "#d0d0d0",
+    "surfaceVariantText": "#212121",
+    "surfaceTint": "#5577cc",
+    "background": "#eeeeee",
+    "backgroundText": "#6a8a3a",
+    "outline": "#60605f",
+    "surfaceContainer": "#d0d0d0",
+    "surfaceContainerHigh": "#c0c0c0",
+    "error": "#c06040",
+    "warning": "#b07008",
+    "info": "#5577cc"
+  }
+}
