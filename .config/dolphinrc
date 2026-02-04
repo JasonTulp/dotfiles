@@ -3,27 +3,30 @@ MenuBar=Disabled
 [CompactMode]
 PreviewSize=22
 UseSystemFont=false
-ViewFont=JetBrainsMono Nerd Font,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+ViewFont=JetBrainsMono Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [DetailsMode]
 UseSystemFont=false
-ViewFont=JetBrainsMono Nerd Font,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+ViewFont=JetBrainsMono Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [General]
 DoubleClickViewAction=none
+ShowStatusBar=FullWidth
 Version=202
 ViewPropsTimestamp=2026,1,29,16,47,4.252
 
 [IconsMode]
 UseSystemFont=false
-ViewFont=JetBrainsMono Nerd Font,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+ViewFont=JetBrainsMono Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 [KFileDialog Settings]
 Places Icons Auto-resize=false
 Places Icons Static Size=22
 
 [MainWindow]
+Height 1080=700
 MenuBar=Disabled
+Width 1920=1200
 
 [PreviewSettings]
 Plugins=ffmpegthumbnailer,appimagethumbnail,audiothumbnail,glycin-heif,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,glycin-svg,svgthumbnail,gsf-office
