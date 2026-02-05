@@ -45,6 +45,26 @@ submenu_overlap=0
 tooltip_delay=-1
 dark_titlebar=true
 check_size=16
+alt_mnemonic=true
+contrast=1.00
+dialog_button_layout=0
+drag_from_buttons=false
+hide_combo_checkboxes=false
+intensity=1.00
+layout_margin=6
+no_inactiveness=false
+no_window_pattern=false
+opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,vlc,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,avidemux3_qt5,kamoso,QtCreator,VirtualBox,VirtualBoxVM,trojita,dragon,digikam,lyx
+reduce_menu_opacity=0
+reduce_window_opacity=0
+respect_DE=true
+saturation=1.00
+scrollable_menu=true
+scrollbar_in_view=false
+shadowless_popup=false
+spin_button_width=16
+submenu_delay=250
+tree_branch_line=false
 
 [GeneralColors]
 window.color=#212121
@@ -86,6 +106,12 @@ single_top_toolbar=false
 tint_on_mouseover=0
 no_selection_tint=true
 transparent_pcmanfm_view=false
+blur_only_active_window=false
+centered_forms=false
+kinetic_scrolling=false
+middle_click_scroll=false
+noninteger_translucency=false
+style_vertical_toolbars=false
 
 [PanelButtonCommand]
 frame.top=3
@@ -283,8 +309,8 @@ text.margin=true
 text.normal.color=#d4d4d4
 text.press.color=#101010
 text.toggle.color=#101010
-text.focus.color=#101010
-text.toggle.inactive.color=#101010
+text.focus.color=#d4d4d4
+text.toggle.inactive.color=#d4d4d4
 frame.element=itemview
 interior.element=itemview
 frame.top=2
@@ -358,3 +384,6 @@ indicator.element=carrow
 
 [Splitter]
 indicator.size=0
+
+[Focus]
+frame=true

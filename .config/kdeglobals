@@ -1,5 +1,6 @@
 [General]
 ColorScheme=MaterialDarker
+widgetStyle=kvantum
 
 [Icons]
 Theme=Papirus-Dark

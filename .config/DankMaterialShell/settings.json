@@ -10,7 +10,7 @@
   "dockTransparency": 1,
   "widgetBackgroundColor": "sch",
   "widgetColorMode": "default",
-  "cornerRadius": 24,
+  "cornerRadius": 25,
   "niriLayoutGapsOverride": -1,
   "niriLayoutRadiusOverride": -1,
   "niriLayoutBorderSize": -1,
@@ -105,9 +105,9 @@
       "width": 50
     }
   ],
-  "showWorkspaceIndex": false,
+  "showWorkspaceIndex": true,
   "showWorkspaceName": false,
-  "showWorkspacePadding": true,
+  "showWorkspacePadding": false,
   "workspaceScrolling": false,
   "showWorkspaceApps": true,
   "maxWorkspaceIcons": 3,
@@ -239,12 +239,12 @@
   "dockAutoHide": false,
   "dockGroupByApp": false,
   "dockOpenOnOverview": false,
-  "dockPosition": 2,
-  "dockSpacing": 4,
+  "dockPosition": 3,
+  "dockSpacing": 8,
   "dockBottomGap": 0,
   "dockMargin": 0,
   "dockIconSize": 40,
-  "dockIndicatorStyle": "circle",
+  "dockIndicatorStyle": "line",
   "dockBorderEnabled": false,
   "dockBorderColor": "surfaceText",
   "dockBorderOpacity": 1,
@@ -308,8 +308,47 @@
   "updaterCustomCommand": "",
   "updaterTerminalAdditionalParams": "",
   "displayNameMode": "system",
-  "screenPreferences": {},
-  "showOnLastDisplay": {},
+  "screenPreferences": {
+    "notifications": [
+      {
+        "name": "DP-2",
+        "model": "U28E590"
+      }
+    ],
+    "wallpaper": [
+      "all"
+    ],
+    "osd": [
+      {
+        "name": "DP-1",
+        "model": "Odyssey G70B"
+      }
+    ],
+    "toast": [
+      {
+        "name": "DP-2",
+        "model": "U28E590"
+      }
+    ],
+    "notepad": [
+      {
+        "name": "HDMI-A-1",
+        "model": "Q32V3WG5"
+      }
+    ],
+    "dock": [
+      {
+        "name": "DP-2",
+        "model": "U28E590"
+      }
+    ]
+  },
+  "showOnLastDisplay": {
+    "notifications": false,
+    "osd": false,
+    "toast": false,
+    "dock": false
+  },
   "niriOutputSettings": {},
   "hyprlandOutputSettings": {},
   "barConfigs": [
@@ -319,7 +358,10 @@
       "enabled": true,
       "position": 0,
       "screenPreferences": [
-        "all"
+        {
+          "name": "DP-1",
+          "model": "Odyssey G70B"
+        }
       ],
       "showOnLastDisplay": true,
       "leftWidgets": [
@@ -385,16 +427,16 @@
           "enabled": true
         }
       ],
-      "spacing": 7,
-      "innerPadding": 9,
+      "spacing": 0,
+      "innerPadding": 4,
       "bottomGap": 0,
-      "transparency": 0.83,
+      "transparency": 0.95,
       "widgetTransparency": 1,
-      "squareCorners": false,
+      "squareCorners": true,
       "noBackground": false,
-      "gothCornersEnabled": false,
-      "gothCornerRadiusOverride": false,
-      "gothCornerRadiusValue": 6,
+      "gothCornersEnabled": true,
+      "gothCornerRadiusOverride": true,
+      "gothCornerRadiusValue": 14,
       "borderEnabled": false,
       "borderColor": "surfaceText",
       "borderOpacity": 1,
@@ -403,7 +445,144 @@
       "widgetOutlineColor": "primary",
       "widgetOutlineOpacity": 1,
       "widgetOutlineThickness": 1,
-      "fontScale": 1,
+      "fontScale": 1.17,
+      "autoHide": false,
+      "autoHideDelay": 250,
+      "showOnWindowsOpen": false,
+      "openOnOverview": false,
+      "visible": true,
+      "popupGapsAuto": true,
+      "popupGapsManual": 4,
+      "maximizeDetection": true,
+      "scrollEnabled": true,
+      "scrollXBehavior": "column",
+      "scrollYBehavior": "workspace",
+      "shadowIntensity": 0,
+      "shadowOpacity": 60,
+      "shadowColorMode": "text",
+      "shadowCustomColor": "#000000"
+    },
+    {
+      "id": "bar1770192050924",
+      "name": "Bar 2",
+      "enabled": true,
+      "position": 3,
+      "screenPreferences": [
+        {
+          "name": "DP-2",
+          "model": "U28E590"
+        }
+      ],
+      "showOnLastDisplay": false,
+      "leftWidgets": [
+        {
+          "id": "launcherButton",
+          "enabled": true
+        },
+        {
+          "id": "workspaceSwitcher",
+          "enabled": true
+        }
+      ],
+      "centerWidgets": [
+        {
+          "id": "music",
+          "enabled": true,
+          "mediaSize": 2
+        },
+        {
+          "id": "clipboard",
+          "enabled": true
+        }
+      ],
+      "rightWidgets": [
+        {
+          "id": "runningApps",
+          "enabled": true
+        }
+      ],
+      "spacing": 0,
+      "innerPadding": 17,
+      "bottomGap": -1,
+      "transparency": 0.95,
+      "widgetTransparency": 1,
+      "squareCorners": true,
+      "noBackground": false,
+      "gothCornersEnabled": true,
+      "gothCornerRadiusOverride": true,
+      "gothCornerRadiusValue": 15,
+      "borderEnabled": false,
+      "borderColor": "surfaceText",
+      "borderOpacity": 1,
+      "borderThickness": 1,
+      "widgetOutlineEnabled": false,
+      "widgetOutlineColor": "primary",
+      "widgetOutlineOpacity": 1,
+      "widgetOutlineThickness": 1,
+      "fontScale": 1.23,
+      "autoHide": false,
+      "autoHideDelay": 250,
+      "showOnWindowsOpen": false,
+      "openOnOverview": false,
+      "visible": true,
+      "popupGapsAuto": true,
+      "popupGapsManual": 4,
+      "maximizeDetection": true,
+      "scrollEnabled": false,
+      "scrollXBehavior": "column",
+      "scrollYBehavior": "workspace",
+      "shadowIntensity": 0,
+      "shadowOpacity": 16,
+      "shadowColorMode": "text",
+      "shadowCustomColor": "#000000"
+    },
+    {
+      "id": "bar1770192415372",
+      "name": "Bar 3",
+      "enabled": true,
+      "position": 0,
+      "screenPreferences": [
+        {
+          "name": "HDMI-A-1",
+          "model": "Q32V3WG5"
+        }
+      ],
+      "showOnLastDisplay": false,
+      "leftWidgets": [
+        {
+          "id": "launcherButton",
+          "enabled": true
+        },
+        {
+          "id": "workspaceSwitcher",
+          "enabled": true
+        },
+        {
+          "id": "focusedWindow",
+          "enabled": true
+        }
+      ],
+      "centerWidgets": [],
+      "rightWidgets": [],
+      "spacing": 0,
+      "innerPadding": 4,
+      "bottomGap": 0,
+      "transparency": 0.95,
+      "widgetTransparency": 1,
+      "squareCorners": true,
+      "noBackground": false,
+      "gothCornersEnabled": true,
+      "gothCornerRadiusOverride": true,
+      "gothCornerRadiusValue": 17,
+      "borderEnabled": false,
+      "borderColor": "surfaceText",
+      "borderOpacity": 1,
+      "borderThickness": 1,
+      "widgetOutlineEnabled": false,
+      "widgetOutlineColor": "primary",
+      "widgetOutlineOpacity": 1,
+      "widgetOutlineThickness": 1,
+      "fontScale": 1.12,
       "autoHide": false,
       "autoHideDelay": 250,
       "showOnWindowsOpen": false,
@@ -490,7 +669,134 @@
   "systemMonitorVariants": [],
   "desktopWidgetPositions": {},
   "desktopWidgetGridSettings": {},
-  "desktopWidgetInstances": [],
+  "desktopWidgetInstances": [
+    {
+      "id": "dw_1770192536917_sfk28ml11",
+      "widgetType": "systemMonitor",
+      "name": "System Monitor",
+      "enabled": true,
+      "config": {
+        "showHeader": false,
+        "transparency": 0.8,
+        "colorMode": "primary",
+        "customColor": "#ffffff",
+        "showCpu": true,
+        "showCpuGraph": true,
+        "showCpuTemp": true,
+        "showGpuTemp": false,
+        "gpuPciId": "10de:2b85",
+        "showMemory": true,
+        "showMemoryGraph": true,
+        "showNetwork": true,
+        "showNetworkGraph": true,
+        "showDisk": true,
+        "showTopProcesses": true,
+        "topProcessCount": 3,
+        "topProcessSortBy": "cpu",
+        "layoutMode": "auto",
+        "graphInterval": 60,
+        "displayPreferences": [
+          {
+            "name": "DP-1",
+            "model": "Odyssey G70B"
+          }
+        ],
+        "showOnOverlay": false,
+        "clickThrough": true
+      },
+      "positions": {
+        "HDMI-A-1": {
+          "width": 516.046875,
+          "height": 510.6640625,
+          "x": 47.68359375,
+          "y": 882.3984375
+        },
+        "DP-1": {
+          "width": 395.4453125,
+          "height": 486.1015625,
+          "x": 2155.546875,
+          "y": 59.48046875
+        },
+        "DP-2": {
+          "width": 320,
+          "height": 480,
+          "x": 1120,
+          "y": 480
+        },
+        "HDMI-A-2": {
+          "width": 320,
+          "height": 480,
+          "x": 1120,
+          "y": 480
+        },
+        "DP-4": {
+          "width": 320,
+          "height": 480,
+          "x": 1760,
+          "y": 840
+        },
+        "DP-5": {
+          "width": 320,
+          "height": 480,
+          "x": 1120,
+          "y": 480
+        }
+      }
+    },
+    {
+      "id": "dw_1770192973769_ikure4wy0",
+      "widgetType": "mediaPlayer",
+      "name": "Media Player",
+      "enabled": true,
+      "config": {
+        "displayPreferences": [
+          {
+            "name": "DP-1",
+            "model": "Odyssey G70B"
+          }
+        ],
+        "backgroundOpacity": 0
+      },
+      "positions": {
+        "HDMI-A-1": {
+          "width": 320,
+          "height": 200,
+          "x": 416,
+          "y": 924
+        },
+        "DP-1": {
+          "width": 393.0234375,
+          "height": 198.296875,
+          "x": 2156.7109375,
+          "y": 554.08984375
+        },
+        "DP-2": {
+          "width": 320,
+          "height": 200,
+          "x": 1120,
+          "y": 620
+        },
+        "HDMI-A-2": {
+          "width": 320,
+          "height": 200,
+          "x": 1120,
+          "y": 620
+        },
+        "DP-4": {
+          "width": 320,
+          "height": 200,
+          "x": 1760,
+          "y": 980
+        },
+        "DP-5": {
+          "width": 320,
+          "height": 200,
+          "x": 1120,
+          "y": 620
+        }
+      }
+    }
+  ],
   "desktopWidgetGroups": [],
   "builtInPluginSettings": {
     "dms_settings_search": {

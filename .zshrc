@@ -12,7 +12,7 @@ else
 fi
 
 export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -64,6 +64,7 @@ alias c='clear'
 alias v='nvim'
 alias x='exit'
 alias crun='cargo run -- --dev --tmp --execution=native --pruning=archive -l=evm=debug'
+alias yay='paru'
 
 # Shell Integrations
 # Use FZF
