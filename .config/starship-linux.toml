@@ -1,20 +1,20 @@
 add_newline = true
 format = """
-[░▒▓](#F57600)\
-[ 󰈸 ](bg:#F57600 fg:#000000)\
+[░▒▓](#E08B0B)\
+[ 󰈸 ](bg:#E08B0B fg:#000000)\
 $directory\
-[](fg:#F57600 bg:#724216)\
+[](fg:#E08B0B bg:#734706)\
 $git_branch\
-[](fg:#724216 bg:#3D2D1E)\
+[](fg:#734706 bg:#3D2603)\
 $nodejs\
 $rust\
 $golang\
 $php\
-[](fg:#3D2D1E)\
+[](fg:#3D2603)\
 $fill\
-[](fg:#3D2D1E)\
+[](fg:#3D2603)\
 $cmd_duration\
-[](fg:#57371A bg:#3D2D1E)\
+[](fg:#57371A bg:#3D2603)\
 $time\
 \n$character"""
 
@@ -23,47 +23,47 @@ symbol=" "
 
 [cmd_duration]
 min_time = 100
-format = '[ $duration ](bold fg:#FFEAD6 bg:#3D2D1E)'
+format = '[ $duration ](bold fg:#FFEAD6 bg:#3D2603)'
 
 [character]
-success_symbol = "[░▒▓ ](#F57600)"
+success_symbol = "[░▒▓ ](#E08B0B)"
 error_symbol = "[░▒▓ ](#FD0000)"
 vimcmd_symbol = "[](green)"
 
 [directory]
-style = "fg:#000000 bg:#F57600 bold"
+style = "fg:#000000 bg:#E08B0B bold"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#724216"
-format = '[[ $symbol $branch ](fg:#EEEEEE bg:#724216)]($style)'
+style = "bg:#734706"
+format = '[[ $symbol $branch ](fg:#EEEEEE bg:#734706)]($style)'
 
 [git_status]
-style = "bg:#724216"
-format = '[[($all_status$ahead_behind )](fg:#EEEEEE bg:#724216)]($style)'
+style = "bg:#734706"
+format = '[[($all_status$ahead_behind )](fg:#EEEEEE bg:#734706)]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:#3D2D1E"
-format = '[[ $symbol ($version) ](fg:#DDDDDD bg:#3D2D1E)]($style)'
+style = "bg:#3D2603"
+format = '[[ $symbol ($version) ](fg:#DDDDDD bg:#3D2603)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#3D2D1E"
-format = '[[ $symbol ($version) ](fg:#DDDDDD bg:#3D2D1E)]($style)'
+style = "bg:#3D2603"
+format = '[[ $symbol ($version) ](fg:#DDDDDD bg:#3D2603)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:#3D2D1E"
-format = '[[ $symbol ($version) ](fg:#DDDDDD bg:#3D2D1E)]($style)'
+style = "bg:#3D2603"
+format = '[[ $symbol ($version) ](fg:#DDDDDD bg:#3D2603)]($style)'
 
 [php]
 symbol = ""
-style = "bg:#3D2D1E"
-format = '[[ $symbol ($version) ](fg:#DDDDDD bg:#3D2D1E)]($style)'
+style = "bg:#3D2603"
+format = '[[ $symbol ($version) ](fg:#DDDDDD bg:#3D2603)]($style)'
 
 [time]
 disabled = false

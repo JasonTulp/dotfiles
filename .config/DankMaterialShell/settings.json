@@ -106,7 +106,7 @@
     }
   ],
   "showWorkspaceIndex": true,
-  "showWorkspaceName": false,
+  "showWorkspaceName": true,
   "showWorkspacePadding": false,
   "workspaceScrolling": false,
   "showWorkspaceApps": true,
@@ -475,10 +475,6 @@
       ],
       "showOnLastDisplay": false,
       "leftWidgets": [
-        {
-          "id": "launcherButton",
-          "enabled": true
-        },
         {
           "id": "workspaceSwitcher",
           "enabled": true

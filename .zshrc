@@ -66,6 +66,44 @@ alias x='exit'
 alias crun='cargo run -- --dev --tmp --execution=native --pruning=archive -l=evm=debug'
 alias yay='paru'
 
+unalias gb 2>/dev/null
+gb() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: gb <branch-name>"
+    return 1
+  fi
+  read "reply?Do you want to create a new branch called '$1'? [Y/n] "
+  if [[ "$reply" =~ ^[Yy]$ || -z "$reply" ]]; then
+    git fetch && git checkout main && git pull && git checkout -b "$1"
+  else
+    echo "Aborted."
+  fi
+}
+
+# Open a tmux session called helical and start cloud, server and geno
+# If the session already exists, stop services and restart them in place
+hel() {
+  local dir="/home/jason/github/hel/helical"
+  if tmux has-session -t helical 2>/dev/null; then
+    tmux send-keys -t helical:1.1 C-c Enter
+    tmux send-keys -t helical:1.2 C-c Enter
+    tmux send-keys -t helical:1.3 C-c Enter
+    sleep 1
+    tmux send-keys -t helical:1.1 "make cloud" Enter
+    tmux send-keys -t helical:1.3 "make server" Enter
+    tmux send-keys -t helical:1.2 "make geno" Enter
+  else
+    helical auth login -u http://localhost:3100
+    tmux new-session -d -s helical -c "$dir"
+    tmux send-keys -t helical "make cloud" Enter
+    tmux split-window -v -t helical:1.1 -c "$dir"
+    tmux send-keys -t helical "make server" Enter
+    tmux split-window -h -t helical:1.1 -c "$dir"
+    tmux send-keys -t helical "make geno" Enter
+    tmux attach -t helical
+  fi
+}
+
 # Shell Integrations
 # Use FZF
 # eval "$(fzf --zsh)"
