@@ -12,6 +12,9 @@ background-opacity=0.9
 background-blur=true
 cursor-style-blink=true
 adjust-cursor-thickness=3
-
+shell-integration-features = ssh-terminfo,ssh-env
+mouse-scroll-multiplier = 1.0
 
 keybind = shift+enter=text:\x1b\r
+keybind = ctrl+backspace=text:\x08
+keybind = ctrl+z=text:\x1f

@@ -1,0 +1,12 @@
+{
+    "id": "tvMirror",
+    "name": "TV Mirror",
+    "description": "TV status, and click to mirror it onto the centre monitor",
+    "version": "1.0.0",
+    "author": "Jason Tulp",
+    "type": "widget",
+    "capabilities": ["dankbar-widget"],
+    "component": "./TvMirrorWidget.qml",
+    "icon": "tv",
+    "permissions": []
+}

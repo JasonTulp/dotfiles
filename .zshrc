@@ -33,11 +33,15 @@ zinit snippet OMZP::aws
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
+zinit snippet OMZL::key-bindings.zsh
 
 # Load completions
 autoload -U compinit && compinit
 
 zinit cdreplay -q
+
+# Ctrl+Backspace: delete word backward
+bindkey '^H' backward-kill-word
 
 # History
 HISTSIZE=5000
@@ -65,6 +69,33 @@ alias v='nvim'
 alias x='exit'
 alias crun='cargo run -- --dev --tmp --execution=native --pruning=archive -l=evm=debug'
 alias yay='paru'
+alias steam='steam -gamelaunchopts "gamescope -W 3840 -H 2160 -w 3840 -h 2160 -r 144 --backend wayland -f -- %command%"'
+alias cld="CLAUDE_CONFIG_DIR=~/.claude-work claude"
+alias clive="CLAUDE_CONFIG_DIR=~/.claude-personal claude"
+alias dev1='bun /home/jason/github/hel/helical/dev/dev.ts'
+alias dev2='bun /home/jason/github/hel/helical2/dev/dev.ts'
+alias dev3='bun /home/jason/github/hel/helical3/dev/dev.ts'
+alias dev4='bun /home/jason/github/hel/helical4/dev/dev.ts'
+alias h1='cd ~/github/hel/helical'
+alias h2='cd ~/github/hel/helical2'
+alias h3='cd ~/github/hel/helical3'
+alias h4='cd ~/github/hel/helical4'
+
+# Run the dev script belonging to the repo you're currently in.
+# Walks up from $PWD looking for dev/dev.ts, so it works from any subdirectory
+# (and inside git worktrees). Falls back to the helical repo when outside one.
+dev() {
+  local dir="$PWD"
+  while [[ -n "$dir" ]]; do
+    if [[ -f "$dir/dev/dev.ts" ]]; then
+      bun "$dir/dev/dev.ts" "$@"
+      return $?
+    fi
+    [[ "$dir" == "/" ]] && break
+    dir="${dir:h}"
+  done
+  bun /home/jason/github/hel/helical/dev/dev.ts "$@"
+}
 
 unalias gb 2>/dev/null
 gb() {
@@ -90,16 +121,16 @@ hel() {
     tmux send-keys -t helical:1.3 C-c Enter
     sleep 1
     tmux send-keys -t helical:1.1 "make cloud" Enter
-    tmux send-keys -t helical:1.3 "make server" Enter
-    tmux send-keys -t helical:1.2 "make geno" Enter
+    tmux send-keys -t helical:1.3 "sleep 3 && ./run.ts simnz" Enter
+    tmux send-keys -t helical:1.2 "make portal" Enter
   else
-    helical auth login -u http://localhost:3100
     tmux new-session -d -s helical -c "$dir"
     tmux send-keys -t helical "make cloud" Enter
     tmux split-window -v -t helical:1.1 -c "$dir"
-    tmux send-keys -t helical "make server" Enter
+    helical auth login -u http://localhost:3100
+    tmux send-keys -t helical "sleep 3 && ./run.ts simnz" Enter
     tmux split-window -h -t helical:1.1 -c "$dir"
-    tmux send-keys -t helical "make geno" Enter
+    tmux send-keys -t helical "make portal" Enter
     tmux attach -t helical
   fi
 }
@@ -108,7 +139,6 @@ hel() {
 # Use FZF
 # eval "$(fzf --zsh)"
 eval "$(starship init zsh)"
-eval "$(zoxide init --cmd cd zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Load NVM
@@ -117,3 +147,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+
+eval "$(zoxide init --cmd cd zsh)"

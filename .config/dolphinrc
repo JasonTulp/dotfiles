@@ -16,6 +16,7 @@ Version=202
 ViewPropsTimestamp=2026,1,29,16,47,4.252
 
 [IconsMode]
+PreviewSize=80
 UseSystemFont=false
 ViewFont=JetBrainsMono Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 

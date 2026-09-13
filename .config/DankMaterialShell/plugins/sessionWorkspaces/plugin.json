@@ -1,0 +1,12 @@
+{
+    "id": "sessionWorkspaces",
+    "name": "Session Workspaces",
+    "description": "Workspace switcher showing only the current Hyprland session",
+    "version": "1.0.0",
+    "author": "Jason Tulp",
+    "type": "widget",
+    "capabilities": ["dankbar-widget"],
+    "component": "./SessionWorkspacesWidget.qml",
+    "icon": "layers",
+    "permissions": []
+}

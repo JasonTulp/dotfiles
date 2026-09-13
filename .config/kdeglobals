@@ -1,6 +1,7 @@
 [General]
 ColorScheme=MaterialDarker
 widgetStyle=kvantum
+TerminalApplication=ghostty
 
 [Icons]
 Theme=Papirus-Dark

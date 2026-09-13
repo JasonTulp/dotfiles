@@ -1,0 +1,19 @@
+{
+  "emojiLauncher": {
+    "enabled": true,
+    "noTrigger": false,
+    "trigger": ""
+  },
+  "wallpaperDiscovery": {
+    "enabled": true
+  },
+  "sessionWorkspaces": {
+    "enabled": true
+  },
+  "sessionIndicator": {
+    "enabled": true
+  },
+  "tvMirror": {
+    "enabled": true
+  }
+}

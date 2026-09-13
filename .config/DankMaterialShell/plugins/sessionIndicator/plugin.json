@@ -1,0 +1,12 @@
+{
+    "id": "sessionIndicator",
+    "name": "Session Indicator",
+    "description": "Shows Hyprland sessions as dots with the current one highlighted",
+    "version": "1.0.0",
+    "author": "Jason Tulp",
+    "type": "widget",
+    "capabilities": ["dankbar-widget"],
+    "component": "./SessionIndicatorWidget.qml",
+    "icon": "radio_button_checked",
+    "permissions": []
+}
