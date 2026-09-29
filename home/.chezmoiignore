@@ -31,6 +31,10 @@
 .config/starship-linux.toml
 {{ end }}
 
+{{ if ne .machine "server" }}
+.config/starship-server.toml
+{{ end }}
+
 {{ if ne .machine "desktop" }}
 # GUI apps, any OS
 .config/ghostty

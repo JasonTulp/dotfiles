@@ -10,6 +10,8 @@ if [[ "$(uname)" != "Linux" ]]; then
 else
   export STARSHIP_CONFIG="$HOME/.config/starship-linux.toml"    
 fi
+# Servers get their own prompt (only deployed there by chezmoi) so they're easy to tell apart
+[ -f "$HOME/.config/starship-server.toml" ] && export STARSHIP_CONFIG="$HOME/.config/starship-server.toml"
 
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
