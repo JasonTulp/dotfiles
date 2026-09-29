@@ -1,0 +1,63 @@
+onboarding = false
+
+# ---------------------------------------------------------------------------
+# Keybindings — mirrors ~/.config/tmux/tmux.conf (+ tmux defaults/plugins)
+# Herdr defaults are kept alongside the tmux-style keys where they don't clash.
+# ---------------------------------------------------------------------------
+[keys]
+prefix = "ctrl+space"
+
+# Splits: tmux  "  = split below,  % = split right
+split_horizontal = ["prefix+minus", 'prefix+"']
+split_vertical = ["prefix+v", "prefix+%"]
+
+# Pane focus: vim-tmux-navigator (ctrl+j/k/l, no prefix; ctrl+h omitted — it is ctrl+backspace in many terminals) + tmux arrows
+focus_pane_left = ["prefix+h", "prefix+left"]
+focus_pane_down = ["prefix+j", "prefix+down", "ctrl+j"]
+focus_pane_up = ["prefix+k", "prefix+up", "ctrl+k"]
+focus_pane_right = ["prefix+l", "prefix+right", "ctrl+l"]
+last_pane = "prefix+;"
+
+# Pane resize: tmux prefix+ctrl+arrows
+resize_pane_left = "prefix+ctrl+left"
+resize_pane_down = "prefix+ctrl+down"
+resize_pane_up = "prefix+ctrl+up"
+resize_pane_right = "prefix+ctrl+right"
+
+# Tabs (= tmux windows): alt+shift+h/l, tmux-sensible prefix+ctrl+p/n
+previous_tab = ["prefix+p", "prefix+ctrl+p", "alt+shift+h"]
+next_tab = ["prefix+n", "prefix+ctrl+n", "alt+shift+l"]
+rename_tab = ["prefix+shift+t", "prefix+,"]
+close_tab = ["prefix+shift+x", "prefix+&"]
+
+# Workspaces/session: tmux prefix+$ rename session, prefix+d detach
+rename_workspace = ["prefix+shift+w", "prefix+$"]
+detach = ["prefix+q", "prefix+d"]
+
+# ---------------------------------------------------------------------------
+# Theme — approximates tmux-themepack "powerline/double/orange"
+# ---------------------------------------------------------------------------
+[theme]
+name = "gruvbox"
+
+[theme.custom]
+accent = "#e08b0b"        # nvim WinSeparator/FloatBorder orange (colourtheme.lua)
+peach = "#e08b0b"
+active_row_bg = "#262626" # colour235
+selection_bg = "#444444"  # colour238
+surface0 = "#262626"
+surface1 = "#444444"
+surface_dim = "#121212"   # colour233 (status bar bg)
+overlay0 = "#585858"      # colour240
+overlay1 = "#767676"      # colour243
+subtext0 = "#8a8a8a"      # colour245
+
+[ui]
+tab_bar_position = "bottom"   # tmux status line lives at the bottom
+tab_bar_right = [
+  { type = "zoom" },
+  { type = "datetime", format = "%H:%M" },
+  { type = "datetime", format = "%d-%b-%y" },
+  { type = "hostname" },
+]
+tab_bar_right_separator = "  "

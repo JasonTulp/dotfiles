@@ -20,7 +20,7 @@ wallpapers/  not deployed
 
 What each machine gets:
 
-- **server**: zsh, tmux, nvim, starship
+- **server**: zsh, tmux, herdr, nvim, starship
 - **Linux desktop**: everything above, plus Hyprland, DMS, mango, waybar, rofi, KDE/Qt/GTK theming, ghostty, zed
 - **macOS desktop**: shared configs, plus aerospace, sketchybar, ghostty, zed
 
