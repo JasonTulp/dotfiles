@@ -44,7 +44,39 @@ if ! command -v starship >/dev/null; then
   curl -sS https://starship.rs/install.sh | sh -s -- -y -b "$HOME/.local/bin"
 fi
 
+# herdr ships as a single static binary on GitHub releases
+if ! command -v herdr >/dev/null; then
+  mkdir -p "$HOME/.local/bin"
+  curl -fsSL -o "$HOME/.local/bin/herdr" \
+    "https://github.com/herdrdev/herdr/releases/latest/download/herdr-linux-$(uname -m)"
+  chmod +x "$HOME/.local/bin/herdr"
+fi
+
+# No zsh from the package manager (e.g. no sudo): use romkatv's static build in ~/.local
+if ! command -v zsh >/dev/null && [ ! -x "$HOME/.local/bin/zsh" ]; then
+  installer=$(mktemp)
+  curl -fsSL -o "$installer" https://raw.githubusercontent.com/romkatv/zsh-bin/master/install
+  sh "$installer" -q -d "$HOME/.local" -e no -a sha256
+  rm -f "$installer"
+fi
+
+zsh_path=$(command -v zsh || echo "$HOME/.local/bin/zsh")
 if [ "$(basename "${SHELL:-}")" != "zsh" ]; then
-  echo "Default shell is ${SHELL:-unknown}. Switch with: chsh -s \"$(command -v zsh)\""
+  if grep -qxF "$zsh_path" /etc/shells 2>/dev/null; then
+    echo "Default shell is ${SHELL:-unknown}. Switch with: chsh -s $zsh_path"
+  elif ! grep -qF '# >>> dotfiles: exec zsh' "$HOME/.bashrc" 2>/dev/null; then
+    # zsh isn't an allowed login shell here, so have interactive bash (incl. ssh logins) hand over.
+    # Escape hatch: ssh -t <host> bash --norc
+    cat >>"$HOME/.bashrc" <<EOF
+
+# >>> dotfiles: exec zsh >>>
+if [[ \$- == *i* && -z "\$ZSH_VERSION" && -x "$zsh_path" ]]; then
+  export SHELL="$zsh_path"
+  exec "\$SHELL" -l
+fi
+# <<< dotfiles: exec zsh <<<
+EOF
+    echo "Added zsh hand-off to ~/.bashrc"
+  fi
 fi
 {{ end -}}
