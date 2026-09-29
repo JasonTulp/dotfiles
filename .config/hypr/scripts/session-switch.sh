@@ -38,20 +38,26 @@ else
 fi
 
 # cross-fade sessions (non-directional) to distinguish them from intra-session
-# switches; restore the normal horizontal slide (mirrors animations.conf) once
+# switches; restore the normal horizontal slide (mirrors animations.lua) once
 # the transition has played out. duration is 4ds (400ms), so reset after 0.6s.
-hyprctl keyword animation "workspaces, 1, 4, smooth, fade" >/dev/null
-( sleep 0.6; hyprctl keyword animation "workspaces, 1, 4, smooth, slide" >/dev/null ) &
+anim() {
+    hyprctl eval "hl.animation({ leaf = \"workspaces\", enabled = true, speed = 4, bezier = \"smooth\", style = \"$1\" })" >/dev/null
+}
+anim fade
+( sleep 0.6; anim slide ) &
 disown
 
 # workspace rules pin each id to its monitor, so order doesn't matter;
 # refocus the original monitor and put the cursor back where it was
 # (focusmonitor warps the cursor when triggered from a bar click)
-batch=""
+# one eval rather than --batch: --batch splits on ";", which is also Lua's
+# statement separator, so the whole sequence goes over as a single Lua chunk
+lua=""
 for ws in "${workspaces[@]}"; do
-    batch+="dispatch workspace $ws; "
+    lua+="hl.dispatch(hl.dsp.focus({ workspace = \"$ws\" })) "
 done
-batch+="dispatch focusmonitor $focused; dispatch movecursor $cursor_x $cursor_y"
+lua+="hl.dispatch(hl.dsp.focus({ monitor = \"$focused\" })) "
+lua+="hl.dispatch(hl.dsp.cursor.move({ x = $cursor_x, y = $cursor_y }))"
 
-hyprctl --batch "$batch"
+hyprctl eval "$lua" >/dev/null
 echo "$target" > "$state_dir/current"

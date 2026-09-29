@@ -11,7 +11,7 @@ hl.bind("SUPER + B", hl.dsp.exec_cmd(browser))
 hl.bind("SUPER + E", hl.dsp.exec_cmd(filemanager))
 hl.bind("SUPER + C", hl.dsp.exec_cmd(terminal .. " -e /home/jason/.local/bin/claude"))
 hl.bind("SUPER + W", hl.dsp.exec_cmd(terminal .. " -e zsh -ic hel"))
-hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd("zsh -ic hel"))
+hl.bind("SUPER + SHIFT + W", hl.dsp.exec_cmd("zsh -ic hel-restart"))
 
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("pkill -x dms; sleep 0.5 && /usr/bin/dms run --session"))
 

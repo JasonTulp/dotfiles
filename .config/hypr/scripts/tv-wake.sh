@@ -16,8 +16,10 @@ drm_state() {
     cat /sys/class/drm/card*-"$TV_MONITOR"/enabled 2>/dev/null | head -1
 }
 
+# `monitors all`, because monitors.lua leaves the TV disabled: a disabled output
+# is off the plain list, while a connector with nothing in it drops off both.
 hyprland_sees_tv() {
-    hyprctl monitors -j | jq -e --arg m "$TV_MONITOR" 'any(.[]; .name == $m)' >/dev/null
+    hyprctl monitors all -j | jq -e --arg m "$TV_MONITOR" 'any(.[]; .name == $m)' >/dev/null
 }
 
 # nothing plugged in at all — the caller decides what to say about that
@@ -25,17 +27,20 @@ hyprland_sees_tv || exit 1
 
 [ "$(drm_state)" = "enabled" ] && exit 0
 
-# take the mode straight from monitors.conf so it is not written down twice;
-# a plain `hyprctl reload` is not enough, the output has to be re-stated
-rule=$(sed -n "s/^monitor *= *$TV_MONITOR, *//p" ~/.config/hypr/monitors.conf | head -1 | tr -d ' ')
-if [ -z "$rule" ]; then
-    echo "tv-wake: no $TV_MONITOR line in monitors.conf" >&2
+# take the mode straight from monitors.lua so it is not written down twice:
+# that file leaves the TV's spec in the global TV_MODE, which the config's Lua
+# state still holds, so it is read back live rather than re-parsed off disk.
+# A plain `hyprctl reload` is not enough, the output has to be re-stated.
+if ! hyprctl repl 'return type(TV_MODE)' 2>/dev/null | grep -qx table; then
+    echo "tv-wake: TV_MODE not set by monitors.lua" >&2
     exit 1
 fi
 
-hyprctl keyword monitor "$TV_MONITOR,disable" >/dev/null
+# `hyprctl keyword` does not exist under the Lua config; hl.monitor via eval is
+# the replacement.
+hyprctl eval 'hl.monitor({ output = TV_MODE.output, disabled = true })' >/dev/null
 sleep 3
-hyprctl keyword monitor "$TV_MONITOR,$rule" >/dev/null
+hyprctl eval 'hl.monitor(TV_MODE)' >/dev/null
 sleep 4
 
 [ "$(drm_state)" = "enabled" ]

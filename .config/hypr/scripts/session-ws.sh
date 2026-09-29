@@ -10,4 +10,19 @@ k=${2:?missing workspace number}
 state_dir="${XDG_RUNTIME_DIR:-/tmp}/hypr-sessions"
 session=$(cat "$state_dir/current" 2>/dev/null || echo 1)
 
-hyprctl dispatch "$action" $(( (session - 1) * 100 + k ))
+ws=$(( (session - 1) * 100 + k ))
+
+# `hyprctl dispatch` takes a Lua expression now that the config is Lua; the old
+# `dispatch workspace 5` form is rejected by the parser.
+case "$action" in
+    workspace)
+        hyprctl dispatch "hl.dsp.focus({ workspace = \"$ws\" })"
+        ;;
+    movetoworkspace)
+        hyprctl dispatch "hl.dsp.window.move({ workspace = \"$ws\" })"
+        ;;
+    *)
+        echo "session-ws.sh: unknown action '$action'" >&2
+        exit 1
+        ;;
+esac

@@ -12,9 +12,10 @@ mkdir -p "$state_dir"
 origins="$state_dir/origins"
 touch "$origins"
 
-# with the TV off there is no HDMI-A-1, and name:TV would land on the desk
-if ! hyprctl monitors -j | jq -e --arg m "$TV_MONITOR" 'any(.[]; .name == $m)' >/dev/null; then
-    notify-send -a "TV" "TV not connected" "Turn the TV on first." 2>/dev/null || true
+# the TV head is disabled while game mode is off, and without a real HDMI-A-1
+# name:TV would land on the desk
+if ! ~/.config/hypr/scripts/tv-wake.sh; then
+    notify-send -a "TV" "TV not ready" "No $TV_MONITOR output, or it would not light." 2>/dev/null || true
     exit 1
 fi
 
@@ -45,8 +46,8 @@ if [ "$(as_token "$workspace")" = "$TV_WORKSPACE" ]; then
     fi
     grep -v "^$address " "$origins" > "$origins.tmp" || true
     mv "$origins.tmp" "$origins"
-    hyprctl dispatch movetoworkspace "$origin"
+    hyprctl dispatch "hl.dsp.window.move({ workspace = \"$origin\" })"
 else
     echo "$address $(as_token "$workspace")" >> "$origins"
-    hyprctl dispatch movetoworkspace "$TV_WORKSPACE"
+    hyprctl dispatch "hl.dsp.window.move({ workspace = \"$TV_WORKSPACE\" })"
 fi

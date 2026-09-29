@@ -10,7 +10,7 @@ This listens on the Hyprland event socket and enforces one invariant: a tiled
 window focused on the target monitor spans the full width. Whenever a window
 opens there, is moved there, is unfloated there, or is simply focused there and
 sits beside its neighbour instead of below it, `layoutmsg togglesplit` stacks it.
-Needs dwindle:preserve_split = true (layout.conf) so the axis is not recomputed
+Needs dwindle:preserve_split = true (layout.lua) so the axis is not recomputed
 the next time the container is resized.
 
 Only ever touches the focused window, so it can't yank focus around.
@@ -114,7 +114,7 @@ def stack_focused():
         log(f"{window['class']} is {width:.0f}px of {monitor_width:.0f}px — stacking")
         if DRY_RUN:
             return
-        subprocess.run(["hyprctl", "dispatch", "layoutmsg", "togglesplit"],
+        subprocess.run(["hyprctl", "dispatch", 'hl.dsp.layout("togglesplit")'],
                        capture_output=True, check=False)
         time.sleep(TOGGLE_DELAY)
 

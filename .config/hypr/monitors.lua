@@ -32,7 +32,11 @@ hl.monitor({ output = RIGHT, mode = "2560x1440@60", position = "5120x0", scale =
 -- scripts/tv-wake.sh re-states this mode after the TV is switched back on, and
 -- reads it straight out of this table so it is not written down twice.
 TV_MODE = { output = TV, mode = "1920x1080@60", position = "20000x0", scale = 1 }
-hl.monitor(TV_MODE)
+
+-- Left disabled: an unused head still holds a slice of the display bandwidth
+-- the centre panel is already short of. scripts/tv-wake.sh re-states TV_MODE to
+-- light it, and scripts/game-mode.sh disables it again on the way out.
+hl.monitor({ output = TV, disabled = true })
 
 -- Workspace assignments
 -- Center monitor (Odyssey G70B): 1-6

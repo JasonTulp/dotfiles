@@ -45,18 +45,20 @@ mirror_on() {
     local spec
     spec=$(hyprctl monitors -j | jq -r --arg m "$MIRROR_MONITOR" \
         '.[] | select(.name == $m)
-         | "\(.width)x\(.height)@\(.refreshRate | round),\(.x)x\(.y),\(.scale)"')
+         | "mode = \"\(.width)x\(.height)@\(.refreshRate | round)\", position = \"\(.x)x\(.y)\", scale = \(.scale)"')
 
-    hyprctl keyword monitor "$MIRROR_MONITOR,$spec,mirror,$TV_MONITOR" >/dev/null
+    # `hyprctl keyword` does not exist under the Lua config; hl.monitor via eval
+    # is the replacement.
+    hyprctl eval "hl.monitor({ output = \"$MIRROR_MONITOR\", $spec, mirror = \"$TV_MONITOR\" })" >/dev/null
     sleep 1
 
     # drive the TV from here: input follows the cursor, so it has to go over
-    hyprctl --batch "dispatch focusmonitor $TV_MONITOR; dispatch workspace $TV_WORKSPACE" >/dev/null
+    hyprctl eval "hl.dispatch(hl.dsp.focus({ monitor = \"$TV_MONITOR\" })) hl.dispatch(hl.dsp.focus({ workspace = \"$TV_WORKSPACE\" }))" >/dev/null
     notify "TV mirrored" "$MIRROR_MONITOR is showing the TV"
 }
 
 mirror_off() {
-    # monitors.conf is the one place the real geometry lives, so re-read it
+    # monitors.lua is the one place the real geometry lives, so re-read it
     # rather than keeping a second copy of the monitor line in this script
     hyprctl reload >/dev/null
     sleep 2
@@ -65,12 +67,12 @@ mirror_off() {
         local workspace
         while read -r workspace; do
             [ -n "$workspace" ] || continue
-            hyprctl dispatch moveworkspacetomonitor "$workspace" "$MIRROR_MONITOR" >/dev/null
+            hyprctl dispatch "hl.dsp.workspace.move({ workspace = \"$workspace\", monitor = \"$MIRROR_MONITOR\" })" >/dev/null
         done < "$state_dir/mirror-workspaces"
     fi
 
     if [ -s "$state_dir/mirror-active" ]; then
-        hyprctl --batch "dispatch focusmonitor $MIRROR_MONITOR; dispatch workspace $(cat "$state_dir/mirror-active")" >/dev/null
+        hyprctl eval "hl.dispatch(hl.dsp.focus({ monitor = \"$MIRROR_MONITOR\" })) hl.dispatch(hl.dsp.focus({ workspace = \"$(cat "$state_dir/mirror-active")\" }))" >/dev/null
     fi
 
     rm -f "$state_dir/mirror-workspaces" "$state_dir/mirror-active"

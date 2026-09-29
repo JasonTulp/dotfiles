@@ -39,10 +39,6 @@ notify() {
     notify-send -a "Game mode" "$1" "${2:-}" || true
 }
 
-tv_connected() {
-    hyprctl monitors -j | jq -e --arg m "$TV_MONITOR" 'any(.[]; .name == $m)' >/dev/null
-}
-
 # ---------------------------------------------------------------- gamescope --
 
 gamescope_pid() {
@@ -198,7 +194,7 @@ restore_desk_cursor() {
     local x y
     x=$(cut -d',' -f1 < "$state_dir/desk-cursor" | tr -d ' ')
     y=$(cut -d',' -f2 < "$state_dir/desk-cursor" | tr -d ' ')
-    hyprctl dispatch movecursor "$x" "$y" >/dev/null
+    hyprctl dispatch "hl.dsp.cursor.move({ x = $x, y = $y })" >/dev/null
 }
 
 restore_desk_focus() {
@@ -206,10 +202,10 @@ restore_desk_focus() {
     window=$(cat "$state_dir/desk-window" 2>/dev/null || true)
     if [ -n "$window" ] && hyprctl clients -j \
         | jq -e --arg a "$window" 'any(.[]; .address == $a)' >/dev/null; then
-        hyprctl dispatch focuswindow "address:$window" >/dev/null
+        hyprctl dispatch "hl.dsp.focus({ window = \"address:$window\" })" >/dev/null
     else
         # the window is gone, so fall back to whatever the mirror monitor holds
-        hyprctl dispatch focusmonitor "$MIRROR_MONITOR" >/dev/null
+        hyprctl dispatch "hl.dsp.focus({ monitor = \"$MIRROR_MONITOR\" })" >/dev/null
     fi
     restore_desk_cursor
 }
@@ -218,11 +214,12 @@ focus_tv() {
     local address
     address=$(gamescope_address)
     if [ -n "$address" ]; then
-        hyprctl dispatch focuswindow "address:$address" >/dev/null
+        hyprctl dispatch "hl.dsp.focus({ window = \"address:$address\" })" >/dev/null
     else
-        tv_connected || { notify "TV not connected"; exit 1; }
-        hyprctl --batch \
-            "dispatch focusmonitor $TV_MONITOR; dispatch workspace $TV_WORKSPACE" >/dev/null
+        ~/.config/hypr/scripts/tv-wake.sh \
+            || { notify "TV not ready" "No $TV_MONITOR output, or it would not light."; exit 1; }
+        hyprctl eval \
+            "hl.dispatch(hl.dsp.focus({ monitor = \"$TV_MONITOR\" })) hl.dispatch(hl.dsp.focus({ workspace = \"$TV_WORKSPACE\" }))" >/dev/null
     fi
 }
 
@@ -267,8 +264,8 @@ game_mode_on() {
 
     # launch from the TV workspace so misc:initial_workspace_tracking puts the
     # gamescope window there without waiting on the window rule
-    hyprctl --batch \
-        "dispatch focusmonitor $TV_MONITOR; dispatch workspace $TV_WORKSPACE" >/dev/null
+    hyprctl eval \
+        "hl.dispatch(hl.dsp.focus({ monitor = \"$TV_MONITOR\" })) hl.dispatch(hl.dsp.focus({ workspace = \"$TV_WORKSPACE\" }))" >/dev/null
 
     launch_gamescope
 
@@ -281,13 +278,13 @@ game_mode_on() {
 
     # place the window ourselves rather than trusting the window rule, and
     # leave the keyboard on it so Steam keeps its Big Picture controller profile
-    hyprctl --batch \
-        "dispatch movetoworkspacesilent $TV_WORKSPACE,address:$address; dispatch focuswindow address:$address" >/dev/null
+    hyprctl eval \
+        "hl.dispatch(hl.dsp.window.move({ window = \"address:$address\", workspace = \"$TV_WORKSPACE\", follow = false })) hl.dispatch(hl.dsp.focus({ window = \"address:$address\" }))" >/dev/null
 
     # gamescope asks for fullscreen itself, so only step in if it did not take
     if [ "$(hyprctl clients -j | jq -r --arg a "$address" \
             'first(.[] | select(.address == $a) | .fullscreen)')" = "0" ]; then
-        hyprctl dispatch fullscreen 0 >/dev/null
+        hyprctl dispatch "hl.dsp.window.fullscreen({ mode = \"fullscreen\" })" >/dev/null
     fi
 
     restore_desk_cursor
@@ -299,6 +296,9 @@ game_mode_off() {
     audio_to_desk
 
     restore_desk_focus
+
+    # focus is back on the desk, so the head can go
+    hyprctl eval 'hl.monitor({ output = TV_MODE.output, disabled = true })' >/dev/null
 
     notify "Game mode off" "Audio and focus back on the desk"
 }

@@ -22,6 +22,6 @@ fi
 
 target_ws=$(( (target - 1) * 100 + k ))
 
-hyprctl dispatch movetoworkspacesilent "$target_ws"
+hyprctl dispatch "hl.dsp.window.move({ workspace = \"$target_ws\", follow = false })"
 ~/.config/hypr/scripts/session-switch.sh "$target"
-hyprctl dispatch workspace "$target_ws"
+hyprctl dispatch "hl.dsp.focus({ workspace = \"$target_ws\" })"

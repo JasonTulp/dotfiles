@@ -72,6 +72,9 @@ alias yay='paru'
 alias steam='steam -gamelaunchopts "gamescope -W 3840 -H 2160 -w 3840 -h 2160 -r 144 --backend wayland -f -- %command%"'
 alias cld="CLAUDE_CONFIG_DIR=~/.claude-work claude"
 alias clive="CLAUDE_CONFIG_DIR=~/.claude-personal claude"
+export PATH="$HOME/.bun/bin:$PATH"
+export PATH="$HOME/.bun/bin:$PATH"
+export PATH="$HOME/.bun/bin:$PATH"
 alias dev1='bun /home/jason/github/hel/helical/dev/dev.ts'
 alias dev2='bun /home/jason/github/hel/helical2/dev/dev.ts'
 alias dev3='bun /home/jason/github/hel/helical3/dev/dev.ts'
@@ -111,28 +114,36 @@ gb() {
   fi
 }
 
-# Open a tmux session called helical and start cloud, server and geno
-# If the session already exists, stop services and restart them in place
+# Open a tmux session called helical with three windows:
+#   1: dev stack canadianangus-demo   2: docker compose up   3: make portal
+# If the session already exists, just attach to it
 hel() {
   local dir="/home/jason/github/hel/helical"
   if tmux has-session -t helical 2>/dev/null; then
-    tmux send-keys -t helical:1.1 C-c Enter
-    tmux send-keys -t helical:1.2 C-c Enter
-    tmux send-keys -t helical:1.3 C-c Enter
-    sleep 1
-    tmux send-keys -t helical:1.1 "make cloud" Enter
-    tmux send-keys -t helical:1.3 "sleep 3 && ./run.ts simnz" Enter
-    tmux send-keys -t helical:1.2 "make portal" Enter
+    tmux attach -t helical
   else
     tmux new-session -d -s helical -c "$dir"
-    tmux send-keys -t helical "make cloud" Enter
-    tmux split-window -v -t helical:1.1 -c "$dir"
-    helical auth login -u http://localhost:3100
-    tmux send-keys -t helical "sleep 3 && ./run.ts simnz" Enter
-    tmux split-window -h -t helical:1.1 -c "$dir"
-    tmux send-keys -t helical "make portal" Enter
+    tmux send-keys -t helical:1 "dev stack canadianangus-demo" Enter
+    tmux new-window -t helical:2 -c "$dir"
+    tmux send-keys -t helical:2 "docker compose up" Enter
+    tmux new-window -t helical:3 -c "$dir"
+    tmux send-keys -t helical:3 "make portal" Enter
+    tmux select-window -t helical:1
     tmux attach -t helical
   fi
+}
+
+# Stop and restart every service in the helical session without attaching
+hel-restart() {
+  tmux has-session -t helical 2>/dev/null || return 1
+  tmux send-keys -t helical:1 C-c Enter
+  tmux send-keys -t helical:2 C-c Enter
+  tmux send-keys -t helical:3 C-c Enter
+  sleep 1
+  tmux send-keys -t helical:1 "dev stack canadianangus-demo" Enter
+  tmux send-keys -t helical:2 "docker compose up" Enter
+  tmux send-keys -t helical:3 "make portal" Enter
+  tmux select-window -t helical:1
 }
 
 # Shell Integrations

@@ -64,11 +64,8 @@ PluginComponent {
     }
 
     function activateWorkspace(ws) {
-        if (ws.id > 0) {
-            Hyprland.dispatch("workspace " + ws.id);
-        } else {
-            Hyprland.dispatch("workspace name:" + ws.name);
-        }
+        // HyprlandService picks the right dispatch form for conf vs lua configs
+        HyprlandService.focusWorkspace(ws.id > 0 ? ws.id : "name:" + ws.name);
     }
 
     function workspaceIcons(wsId, isActiveWs) {
