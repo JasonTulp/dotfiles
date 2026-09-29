@@ -75,10 +75,10 @@ alias clive="CLAUDE_CONFIG_DIR=~/.claude-personal claude"
 export PATH="$HOME/.bun/bin:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
-alias dev1='bun /home/jason/github/hel/helical/dev/dev.ts'
-alias dev2='bun /home/jason/github/hel/helical2/dev/dev.ts'
-alias dev3='bun /home/jason/github/hel/helical3/dev/dev.ts'
-alias dev4='bun /home/jason/github/hel/helical4/dev/dev.ts'
+alias dev1='bun $HOME/github/hel/helical/dev/dev.ts'
+alias dev2='bun $HOME/github/hel/helical2/dev/dev.ts'
+alias dev3='bun $HOME/github/hel/helical3/dev/dev.ts'
+alias dev4='bun $HOME/github/hel/helical4/dev/dev.ts'
 alias h1='cd ~/github/hel/helical'
 alias h2='cd ~/github/hel/helical2'
 alias h3='cd ~/github/hel/helical3'
@@ -97,7 +97,7 @@ dev() {
     [[ "$dir" == "/" ]] && break
     dir="${dir:h}"
   done
-  bun /home/jason/github/hel/helical/dev/dev.ts "$@"
+  bun $HOME/github/hel/helical/dev/dev.ts "$@"
 }
 
 unalias gb 2>/dev/null
@@ -118,7 +118,7 @@ gb() {
 #   1: dev stack canadianangus-demo   2: docker compose up   3: make portal
 # If the session already exists, just attach to it
 hel() {
-  local dir="/home/jason/github/hel/helical"
+  local dir="$HOME/github/hel/helical"
   if tmux has-session -t helical 2>/dev/null; then
     tmux attach -t helical
   else

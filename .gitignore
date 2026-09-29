@@ -1,0 +1,3 @@
+# tmux plugins are fetched by tpm (see home/.chezmoiscripts)
+config/tmux/plugins/
+__pycache__/

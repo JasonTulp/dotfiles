@@ -1,0 +1,38 @@
+{{- /* Paths are target paths relative to ~. Anything listed here is skipped on this machine. */ -}}
+
+{{ if not (and (eq .chezmoi.os "linux") (eq .machine "desktop")) }}
+# Linux desktop only
+.config/hypr
+.config/DankMaterialShell
+.config/dms
+.config/mango
+.config/hyprpanel
+.config/waybar
+.config/rofi
+.config/Kvantum
+.config/qt6ct
+.config/gtk-3.0
+.config/gtk-4.0
+.config/dolphinrc
+.config/kdeglobals
+.config/electron-flags.conf
+.config/bks-flags.conf
+.local/share/color-schemes
+{{ end }}
+
+{{ if ne .chezmoi.os "darwin" }}
+# macOS only
+.config/aerospace
+.config/sketchybar
+.config/starship-mac.toml
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.config/starship-linux.toml
+{{ end }}
+
+{{ if ne .machine "desktop" }}
+# GUI apps, any OS
+.config/ghostty
+.config/zed
+{{ end }}

@@ -1,0 +1,7 @@
+{{- /* Asked once on `chezmoi init`; answer is saved to ~/.config/chezmoi/chezmoi.toml */ -}}
+{{- $machine := promptChoiceOnce . "machine" "Machine type" (list "desktop" "server") -}}
+
+sourceDir = {{ .chezmoi.workingTree | quote }}
+
+[data]
+    machine = {{ $machine | quote }}

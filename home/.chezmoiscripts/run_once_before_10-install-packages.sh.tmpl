@@ -1,0 +1,43 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+# Install the CLI tools the shell/tmux/nvim configs expect. Only installs what's missing.
+set -euo pipefail
+
+# command -> package name
+declare -A pkgs=(
+  [zsh]=zsh [git]=git [curl]=curl [tmux]=tmux [nvim]=neovim
+  [fzf]=fzf [zoxide]=zoxide [unzip]=unzip
+)
+
+missing=()
+for cmd in "${!pkgs[@]}"; do
+  command -v "$cmd" >/dev/null || missing+=("${pkgs[$cmd]}")
+done
+
+sudo=""
+[ "$(id -u)" -ne 0 ] && sudo="sudo"
+
+if [ ${#missing[@]} -gt 0 ]; then
+  echo "Installing: ${missing[*]}"
+  if command -v pacman >/dev/null; then
+    $sudo pacman -S --needed --noconfirm "${missing[@]}"
+  elif command -v apt-get >/dev/null; then
+    $sudo apt-get update
+    $sudo apt-get install -y "${missing[@]}"
+  elif command -v dnf >/dev/null; then
+    $sudo dnf install -y "${missing[@]}"
+  else
+    echo "No supported package manager found; install manually: ${missing[*]}" >&2
+  fi
+fi
+
+# starship isn't packaged everywhere, use the upstream installer into ~/.local/bin
+if ! command -v starship >/dev/null; then
+  mkdir -p "$HOME/.local/bin"
+  curl -sS https://starship.rs/install.sh | sh -s -- -y -b "$HOME/.local/bin"
+fi
+
+if [ "$(basename "${SHELL:-}")" != "zsh" ]; then
+  echo "Default shell is ${SHELL:-unknown}. Switch with: chsh -s \"$(command -v zsh)\""
+fi
+{{ end -}}

@@ -1,7 +1,7 @@
 {
   "currentThemeName": "custom",
   "currentThemeCategory": "custom",
-  "customThemeFile": "/home/jason/dotfiles/.config/dms/themes/materials-darker.json",
+  "customThemeFile": "/home/jason/.config/dms/themes/materials-darker.json",
   "cornerRadius": 25,
   "clockFormat": "12h",
   "barElevationEnabled": false,
